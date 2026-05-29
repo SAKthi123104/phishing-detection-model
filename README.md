@@ -1,13 +1,11 @@
-# phishing-detection-model
-It can scan the phishing email
+
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-# 1. Sample Dataset (Email content and their corresponding labels)
-# '1' represents Phishing, '0' represents Safe
+
 emails = [
     "URGENT: Your account has been suspended! Verify your credentials immediately at http://secure-bank-login.com",
     "Hey, are we still meeting for lunch today at 1 PM?",
@@ -23,24 +21,20 @@ emails = [
 
 labels = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]  # 1 = Phishing, 0 = Safe
 
-# 2. Split the data into Training and Testing sets (80% Train, 20% Test)
+
 X_train, X_test, y_train, y_test = train_test_split(emails, labels, test_size=0.2, random_state=42)
 
-# 3. Feature Extraction: Convert text data into numerical features using TF-IDF
-# This automatically analyzes keywords and textual patterns
+
 vectorizer = TfidfVectorizer(stop_words='english')
 X_train_tfidf = vectorizer.fit_transform(X_train)
 X_test_tfidf = vectorizer.transform(X_test)
 
-# 4. Train the Machine Learning Model (Naive Bayes Classifier)
 model = MultinomialNB()
 model.fit(X_train_tfidf, y_train)
 print("--- Model Training Complete ---")
 
-# 5. Make Predictions on the Test Data
 y_pred = model.predict(X_test_tfidf)
 
-# 6. Display Performance Metrics & Confusion Matrix
 accuracy = accuracy_score(y_test, y_pred)
 cm = confusion_matrix(y_test, y_pred)
 
