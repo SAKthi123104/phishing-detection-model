@@ -1,8 +1,9 @@
-
-
 from sklearn.feature_extraction.text import TfidfVectorizer
+
 from sklearn.model_selection import train_test_split
+
 from sklearn.naive_bayes import MultinomialNB
+
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
 
@@ -46,6 +47,5 @@ print(cm)
 print("(Row 1: Actual Safe, Row 2: Actual Phishing)")
 print("(Col 1: Predicted Safe, Col 2: Predicted Phishing)")
 
-# Optional: Detailed classification report
 print("\n--- Detailed Classification Report ---")
 print(classification_report(y_test, y_pred, target_names=['Safe', 'Phishing']))
